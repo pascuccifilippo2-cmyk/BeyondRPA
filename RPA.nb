@@ -1,0 +1,1810 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     62229,       1802]
+NotebookOptionsPosition[     61931,       1789]
+NotebookOutlinePosition[     62272,       1804]
+CellTagsIndexPosition[     62229,       1801]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Physical", " ", "parameter", " ", "YS", " ", "system"}], "*)"}], 
+  StyleBox["\[IndentingNewLine]",
+   FontFamily->"Source Code Pro",
+   FontWeight->"Bold"], 
+  RowBox[{
+   StyleBox[
+    RowBox[{
+     RowBox[{"rsys", "=", "2.505"}], ";"}],
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], 
+   StyleBox[" ",
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], 
+   StyleBox[
+    RowBox[{"(*", 
+     RowBox[{"rs", " ", "in", " ", "ab", " ", "units"}], "*)"}],
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], "\[IndentingNewLine]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"kfys", "=", 
+      RowBox[{
+       RowBox[{"Sqrt", "[", "2", "]"}], "/", "rsys"}]}], ";"}],
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], 
+   StyleBox["  ",
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], 
+   StyleBox[
+    RowBox[{"(*", 
+     RowBox[{"kf", " ", "in", " ", 
+      RowBox[{"ab", "^", 
+       RowBox[{"-", "1"}]}], " ", "units"}], "*)"}],
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], "\[IndentingNewLine]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"efys", "=", 
+      RowBox[{
+       RowBox[{"kfys", "^", "2"}], "/", "2"}]}], ";"}],
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], 
+   StyleBox["  ",
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], 
+   StyleBox[
+    RowBox[{"(*", 
+     RowBox[{"ef", " ", "in", " ", "Ry"}], "*)"}],
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], "\[IndentingNewLine]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"di", "=", "0.188"}], ";"}],
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], 
+   StyleBox[
+    RowBox[{"(*", 
+     RowBox[{"d", " ", "in", " ", "ab", " ", "units"}], "*)"}],
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], "\[IndentingNewLine]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"gsgv", "=", "2"}], ";"}],
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], "\[IndentingNewLine]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"me", "=", "0.04"}], ";"}],
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], 
+   StyleBox["   ",
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], 
+   StyleBox[
+    RowBox[{"(*", 
+     RowBox[{
+     "effective", " ", "electron", " ", "mass", " ", "in", " ", "unit", " ", 
+      "of", " ", "the", " ", "electron", " ", "mass"}], "*)"}],
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], "\[IndentingNewLine]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"usys", "=", 
+      RowBox[{
+       RowBox[{"-", "0.425"}], "/", "efys"}]}], ";"}],
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], 
+   StyleBox[" ",
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], 
+   StyleBox[
+    RowBox[{"(*", 
+     RowBox[{"chemical", " ", "potential", " ", "in", " ", "Ef"}], "*)"}],
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], 
+   StyleBox[" ",
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   StyleBox[
+    RowBox[{"(*", 
+     RowBox[{
+     "Import", " ", "the", " ", "data", " ", "delta", " ", "screening"}], 
+     "*)"}],
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], "\[IndentingNewLine]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"datays", "=", 
+      RowBox[{"Import", "[", 
+       RowBox[{"\"\<\>\"", ",", "\"\<Table\>\""}], "]"}]}], ";"}],
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], "\[IndentingNewLine]", 
+   StyleBox[
+    RowBox[{"(*", 
+     RowBox[{"Skip", " ", "the", " ", "first", " ", "row"}], "*)"}],
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], "\[IndentingNewLine]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"dataysWithoutHeader", "=", 
+      RowBox[{"Drop", "[", 
+       RowBox[{"datays", ",", "1"}], "]"}]}], ";"}],
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], "\[IndentingNewLine]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"dataysWithoutHeaderLast", "=", 
+      RowBox[{"Drop", "[", 
+       RowBox[{"dataysWithoutHeader", ",", 
+        RowBox[{"-", "1"}]}], "]"}]}], ";"}],
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], "\n", 
+   StyleBox[
+    RowBox[{"(*", 
+     RowBox[{
+     "Extract", " ", "only", " ", "the", " ", "first", " ", "and", " ", 
+      "second", " ", "columns"}], "*)"}],
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], "\[IndentingNewLine]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"deltakysData", "=", 
+      RowBox[{"Map", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"#", "[", 
+            RowBox[{"[", "1", "]"}], "]"}], ",", 
+           RowBox[{"#", "[", 
+            RowBox[{"[", "2", "]"}], "]"}]}], "}"}], "&"}], ",", 
+        "dataysWithoutHeaderLast"}], "]"}]}], ";"}],
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], "\[IndentingNewLine]", 
+   StyleBox[
+    RowBox[{"(*", 
+     RowBox[{"Format", " ", "as", " ", "a", " ", "list"}], "*)"}],
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], "\[IndentingNewLine]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"deltakysformattedData", "=", 
+      RowBox[{"List", "@@@", "deltakysData"}]}], ";"}],
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], "\[IndentingNewLine]", 
+   RowBox[{
+    StyleBox[
+     RowBox[{"deltakys", 
+      StyleBox["=",
+       FontSize->18], 
+      RowBox[{"Interpolation", "[", "deltakysformattedData", "]"}]}],
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], 
+    StyleBox[";",
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], 
+    StyleBox[" ",
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], 
+    StyleBox[
+     RowBox[{"(*", 
+      RowBox[{
+       RowBox[{"Deltakys", " ", "in", " ", "Ry"}], ",", " ", 
+       RowBox[{"k", " ", "in", " ", 
+        RowBox[{"ab", "^", 
+         RowBox[{"-", "1"}]}]}]}], "*)"}],
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    RowBox[{"(*", 
+     RowBox[{
+     "plot", " ", "of", " ", "the", " ", "interpolated", " ", "and", " ", 
+      "imported", " ", "data"}], "*)"}], "\[IndentingNewLine]", 
+    StyleBox[
+     RowBox[{
+      StyleBox[
+       RowBox[{"delta", 
+        StyleBox["ysp",
+         FontFamily->"Source Code Pro"]}]], 
+      StyleBox["=",
+       FontFamily->"Source Code Pro"], 
+      StyleBox[
+       RowBox[{"ListPlot", "[", 
+        RowBox[{"deltakysformattedData", ",", 
+         RowBox[{"PlotStyle", "->", 
+          RowBox[{"{", 
+           RowBox[{"Red", ",", "Dashed"}], "}"}]}], ",", 
+         RowBox[{"PlotRange", "->", "All"}]}], "]"}],
+       FontFamily->"Source Code Pro"]}],
+     FontWeight->"Bold"], 
+    StyleBox[";",
+     FontFamily->"Source Code Pro"]}], "\[IndentingNewLine]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"deltakysplot", "=", 
+      RowBox[{"Plot", "[", 
+       RowBox[{
+        RowBox[{"deltakys", "[", "k", "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"k", ",", "0", ",", "30"}], "}"}], ",", 
+        RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}]}], ";"}],
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], "\[IndentingNewLine]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"deltakysef", "[", 
+      RowBox[{"k_", "?", "NumericQ"}], "]"}], ":=", 
+     RowBox[{
+      RowBox[{"deltakys", "[", 
+       RowBox[{"k", "*", "kfys"}], "]"}], "/", "efys"}]}],
+    FontWeight->"Bold"], 
+   StyleBox["  ",
+    FontWeight->"Bold"], 
+   StyleBox[
+    RowBox[{"(*", 
+     RowBox[{
+      RowBox[{"Deltak", " ", "ys", " ", "in", " ", "EF"}], ",", " ", 
+      RowBox[{"k", " ", "in", " ", "kF"}]}], "*)"}],
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], "\[IndentingNewLine]", 
+   StyleBox[
+    RowBox[{"Show", "[", 
+     RowBox[{"deltaysp", ",", "deltakysplot"}], "]"}],
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Physical", " ", "parameter", " ", "NS", " ", "system"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    StyleBox[
+     RowBox[{"rs", "=", "2.522"}],
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], 
+    StyleBox[";",
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], 
+    StyleBox[" ",
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], 
+    StyleBox[
+     RowBox[{"(*", 
+      RowBox[{"rs", " ", "in", " ", "ab", " ", "units"}], "*)"}],
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], "\[IndentingNewLine]", 
+    StyleBox[
+     RowBox[{"kf", "=", 
+      RowBox[{
+       RowBox[{"Sqrt", "[", "2", "]"}], "/", "rs"}]}],
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], 
+    StyleBox[";",
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], 
+    StyleBox["  ",
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], 
+    StyleBox[
+     RowBox[{"(*", 
+      RowBox[{"kf", " ", "in", " ", 
+       RowBox[{"ab", "^", 
+        RowBox[{"-", "1"}]}], " ", "units"}], "*)"}],
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], "\[IndentingNewLine]", 
+    StyleBox[
+     RowBox[{"ef", "=", 
+      RowBox[{
+       RowBox[{"kf", "^", "2"}], "/", "2"}]}],
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], 
+    StyleBox[";",
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], 
+    StyleBox["  ",
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], 
+    StyleBox[
+     RowBox[{"(*", 
+      RowBox[{"ef", " ", "in", " ", "Ry"}], "*)"}],
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], "\[IndentingNewLine]", 
+    StyleBox[
+     RowBox[{"di", "=", "0.188"}],
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], 
+    StyleBox[";",
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], 
+    StyleBox[
+     RowBox[{"(*", 
+      RowBox[{"d", " ", "in", " ", "ab", " ", "units"}], "*)"}],
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], "\[IndentingNewLine]", 
+    StyleBox[
+     RowBox[{"gsgv", "=", "2"}],
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], 
+    StyleBox[";",
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"]}], "\[IndentingNewLine]", 
+   RowBox[{
+    StyleBox[
+     RowBox[{"me", "=", "0.04"}],
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], 
+    StyleBox[";",
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], 
+    StyleBox["   ",
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], 
+    StyleBox[
+     RowBox[{"(*", 
+      RowBox[{
+      "effective", " ", "electron", " ", "mass", " ", "in", " ", "unit", " ", 
+       "of", " ", "the", " ", "electron", " ", "mass"}], "*)"}],
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], "\[IndentingNewLine]", 
+    StyleBox[
+     RowBox[{"usf", "=", 
+      RowBox[{
+       RowBox[{"-", "0.730"}], "/", "ef"}]}],
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], 
+    StyleBox[";",
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], 
+    StyleBox[" ",
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], 
+    StyleBox[
+     RowBox[{"(*", 
+      RowBox[{"chemical", " ", "potential", " ", "in", " ", "Ef"}], "*)"}],
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], 
+    StyleBox[" ",
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    StyleBox[
+     RowBox[{
+      RowBox[{"Us", "[", 
+       RowBox[{"q_", "?", "NumericQ"}], "]"}], ":=", 
+      RowBox[{"4", "*", 
+       RowBox[{"Pi", "/", 
+        RowBox[{"(", 
+         RowBox[{"Abs", "[", 
+          RowBox[{"q", "*", "kf"}], "]"}], ")"}]}]}]}],
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"]}], 
+   StyleBox[" ",
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], 
+   RowBox[{"(*", 
+    RowBox[{"Us", " ", "in", " ", "Ry", "*", 
+     RowBox[{"ab", "^", "2"}], " ", "and", " ", "q", " ", "in", " ", "kf", 
+     " ", "unit"}], "*)"}], "\[IndentingNewLine]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"Ud", "[", 
+      RowBox[{"q_", "?", "NumericQ"}], "]"}], ":=", 
+     RowBox[{
+      RowBox[{"-", "4"}], "*", "Pi", "*", 
+      RowBox[{
+       RowBox[{"Exp", "[", 
+        RowBox[{"-", 
+         RowBox[{"Abs", "[", 
+          RowBox[{"di", "*", "q", "*", "kf"}], "]"}]}], "]"}], "/", 
+       RowBox[{"(", 
+        RowBox[{"Abs", "[", 
+         RowBox[{"q", "*", "kf"}], "]"}], ")"}]}]}]}],
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], 
+   StyleBox[" ",
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], 
+   RowBox[{"(*", 
+    RowBox[{"Ud", " ", "in", " ", "Ry", "*", 
+     RowBox[{"ab", "^", "2"}], " ", "and", " ", "q", " ", "in", " ", "kf", 
+     " ", "unit"}], "*)"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   StyleBox[
+    RowBox[{"(*", 
+     RowBox[{"Import", " ", "the", " ", "data", " ", "no", " ", "screening"}],
+      "*)"}],
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], "\[IndentingNewLine]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"datans", "=", 
+      RowBox[{"Import", "[", 
+       RowBox[{
+       "\"\</home/cmt/Dropbox/Filippo/to do/Diagramm der screening/code and \
+simulations/Deltakvkukd1.00YINSCR.txt\>\"", ",", "\"\<Table\>\""}], "]"}]}], 
+     ";"}],
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], "\[IndentingNewLine]", 
+   StyleBox[
+    RowBox[{"(*", 
+     RowBox[{"Skip", " ", "the", " ", "first", " ", "row"}], "*)"}],
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], "\[IndentingNewLine]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"datansWithoutHeader", "=", 
+      RowBox[{"Drop", "[", 
+       RowBox[{"datans", ",", "1"}], "]"}]}], ";"}],
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], "\[IndentingNewLine]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"datansWithoutHeaderLast", "=", 
+      RowBox[{"Drop", "[", 
+       RowBox[{"datansWithoutHeader", ",", 
+        RowBox[{"-", "1"}]}], "]"}]}], ";"}],
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], "\[IndentingNewLine]", 
+   StyleBox[
+    RowBox[{"(*", 
+     RowBox[{
+     "Extract", " ", "only", " ", "the", " ", "first", " ", "and", " ", 
+      "second", " ", "columns"}], "*)"}],
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], "\n", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"vkData", "=", 
+      RowBox[{"Map", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"#", "[", 
+            RowBox[{"[", "1", "]"}], "]"}], ",", 
+           RowBox[{"#", "[", 
+            RowBox[{"[", "3", "]"}], "]"}]}], "}"}], "&"}], ",", 
+        "datansWithoutHeaderLast"}], "]"}]}], ";"}],
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], "\n", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"deltakData", "=", 
+      RowBox[{"Map", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"#", "[", 
+            RowBox[{"[", "1", "]"}], "]"}], ",", 
+           RowBox[{"#", "[", 
+            RowBox[{"[", "2", "]"}], "]"}]}], "}"}], "&"}], ",", 
+        "datansWithoutHeaderLast"}], "]"}]}], ";"}],
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], "\[IndentingNewLine]", 
+   StyleBox[
+    RowBox[{"(*", 
+     RowBox[{"Format", " ", "as", " ", "a", " ", "list"}], "*)"}],
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], "\[IndentingNewLine]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"vkformattedData", "=", 
+      RowBox[{"List", "@@@", "vkData"}]}], ";"}],
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], "\[IndentingNewLine]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"deltakformattedData", "=", 
+      RowBox[{"List", "@@@", "deltakData"}]}], ";"}],
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    StyleBox[
+     RowBox[{"vk", 
+      StyleBox["=",
+       FontSize->18], 
+      RowBox[{"Interpolation", "[", "vkformattedData", "]"}]}],
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], 
+    StyleBox[";",
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], 
+    StyleBox[" ",
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], 
+    StyleBox[
+     RowBox[{"(*", 
+      RowBox[{"vk", ",", 
+       RowBox[{"k", " ", "in", " ", 
+        RowBox[{"ab", "^", 
+         RowBox[{"-", "1"}]}]}]}], "*)"}],
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    StyleBox[
+     RowBox[{"deltak", 
+      StyleBox["=",
+       FontSize->18], 
+      RowBox[{"Interpolation", "[", "deltakformattedData", "]"}]}],
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], 
+    StyleBox[";",
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], 
+    StyleBox[" ",
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], 
+    StyleBox[
+     RowBox[{"(*", 
+      RowBox[{
+       RowBox[{"Deltak", " ", "in", " ", "Ry"}], ",", " ", 
+       RowBox[{"k", " ", "in", " ", 
+        RowBox[{"ab", "^", 
+         RowBox[{"-", "1"}]}]}]}], "*)"}],
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], "\[IndentingNewLine]", 
+    StyleBox[
+     RowBox[{
+      StyleBox[
+       RowBox[{"delt", 
+        StyleBox["ap",
+         FontFamily->"Source Code Pro"]}]], 
+      StyleBox["=",
+       FontFamily->"Source Code Pro"], 
+      StyleBox[
+       RowBox[{"ListPlot", "[", 
+        RowBox[{"deltakformattedData", ",", 
+         RowBox[{"PlotStyle", "->", 
+          RowBox[{"{", 
+           RowBox[{"Red", ",", "Dashed"}], "}"}]}], ",", 
+         RowBox[{"PlotRange", "->", "All"}]}], "]"}],
+       FontFamily->"Source Code Pro"]}],
+     FontWeight->"Bold"], 
+    StyleBox[";",
+     FontFamily->"Source Code Pro"]}], "\[IndentingNewLine]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"deltakplot", "=", 
+      RowBox[{"Plot", "[", 
+       RowBox[{
+        RowBox[{"deltak", "[", "k", "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"k", ",", "0", ",", "30"}], "}"}], ",", 
+        RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}]}], ";"}],
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], "\[IndentingNewLine]", 
+   StyleBox[
+    RowBox[{"Show", "[", 
+     RowBox[{"deltap", ",", "deltakplot"}], "]"}],
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], "\[IndentingNewLine]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"vp", "=", 
+      RowBox[{"ListPlot", "[", 
+       RowBox[{"vkformattedData", ",", 
+        RowBox[{"PlotStyle", "->", 
+         RowBox[{"{", 
+          RowBox[{"Red", ",", "Dashed"}], "}"}]}], ",", 
+        RowBox[{"PlotRange", "->", "All"}]}], "]"}]}], ";"}],
+    FontWeight->"Bold"], "\[IndentingNewLine]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"vkplot", "=", 
+      RowBox[{"Plot", "[", 
+       RowBox[{
+        RowBox[{"vk", "[", "k", "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"k", ",", "0", ",", "30"}], "}"}], ",", 
+        RowBox[{"PlotRange", "\[Rule]", "All"}]}], "]"}]}], ";"}],
+    FontWeight->"Bold"], "\[IndentingNewLine]", 
+   StyleBox[
+    RowBox[{"Show", "[", 
+     RowBox[{"vp", ",", "vkplot"}], "]"}],
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"deltakef", "[", 
+      RowBox[{"k_", "?", "NumericQ"}], "]"}], ":=", 
+     RowBox[{
+      RowBox[{"deltak", "[", 
+       RowBox[{"k", "*", "kf"}], "]"}], "/", "ef"}]}],
+    FontWeight->"Bold"], 
+   StyleBox["  ",
+    FontWeight->"Bold"], 
+   StyleBox[
+    RowBox[{"(*", 
+     RowBox[{
+      RowBox[{"Deltak", " ", "in", " ", "EF"}], ",", " ", 
+      RowBox[{"k", " ", "in", " ", "kF"}]}], "*)"}],
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], "\[IndentingNewLine]", 
+   StyleBox[
+    RowBox[{
+     RowBox[{"Ek", "[", 
+      RowBox[{"k_", "?", "NumericQ"}], "]"}], ":=", 
+     RowBox[{"Sqrt", "[", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"k", "^", "2"}], "-", "usf"}], ")"}], "^", "2"}], ")"}], 
+       "+", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"deltakef", "[", "k", "]"}], ")"}], "^", "2"}], ")"}]}], 
+      "]"}]}],
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], 
+   StyleBox[" ",
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], 
+   StyleBox[
+    RowBox[{"(*", 
+     RowBox[{
+      RowBox[{"Ek", " ", "in", " ", "EF"}], ",", " ", 
+      RowBox[{"k", " ", "in", " ", "kF"}]}], "*)"}],
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], "\[IndentingNewLine]", 
+   RowBox[{
+    StyleBox[
+     RowBox[{"kq", "[", 
+      RowBox[{
+       RowBox[{"k_", "?", "NumericQ"}], ",", 
+       RowBox[{"q_", "?", "NumericQ"}], ",", 
+       RowBox[{"t_", "?", "NumericQ"}]}], "]"}],
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], 
+    StyleBox[":=",
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], 
+    RowBox[{"Sqrt", "[", 
+     RowBox[{
+      RowBox[{"k", "^", "2"}], "+", 
+      RowBox[{"q", "^", "2"}], "+", 
+      RowBox[{"(", 
+       RowBox[{"2", "*", "k", "*", "q", "*", 
+        RowBox[{"Cos", "[", "t", "]"}]}], ")"}]}], "]"}]}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"vkf2", 
+     StyleBox["[",
+      FontFamily->"Source Code Pro",
+      FontWeight->"Bold"], 
+     StyleBox[
+      RowBox[{"k_", "?", "NumericQ"}],
+      FontFamily->"Source Code Pro",
+      FontWeight->"Bold"], 
+     StyleBox["]",
+      FontFamily->"Source Code Pro",
+      FontWeight->"Bold"]}], 
+    StyleBox[":=",
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], 
+    StyleBox[
+     RowBox[{
+      RowBox[{"vk", "[", 
+       RowBox[{"k", "*", "kf"}], "]"}], "^", "2"}],
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"]}], 
+   StyleBox[" ",
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], 
+   StyleBox[
+    RowBox[{"(*", 
+     RowBox[{
+      RowBox[{"vk", "^", "2"}], ",", 
+      RowBox[{"k", " ", "in", " ", "kF"}]}], "*)"}],
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"ukf2", 
+     StyleBox["[",
+      FontFamily->"Source Code Pro",
+      FontWeight->"Bold"], 
+     StyleBox[
+      RowBox[{"k_", "?", "NumericQ"}],
+      FontFamily->"Source Code Pro",
+      FontWeight->"Bold"], 
+     StyleBox["]",
+      FontFamily->"Source Code Pro",
+      FontWeight->"Bold"]}], 
+    StyleBox[":=",
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], 
+    StyleBox[
+     RowBox[{"1", "-", 
+      RowBox[{"vkf2", "[", "k", "]"}]}],
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"]}], 
+   StyleBox[" ",
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], 
+   StyleBox[
+    RowBox[{"(*", 
+     RowBox[{
+      RowBox[{"uk", "^", "2"}], ",", 
+      RowBox[{"k", " ", "in", " ", "kF"}]}], "*)"}],
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"vkf", 
+     StyleBox["[",
+      FontFamily->"Source Code Pro",
+      FontWeight->"Bold"], 
+     StyleBox[
+      RowBox[{"k_", "?", "NumericQ"}],
+      FontFamily->"Source Code Pro",
+      FontWeight->"Bold"], 
+     StyleBox["]",
+      FontFamily->"Source Code Pro",
+      FontWeight->"Bold"]}], 
+    StyleBox[":=",
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], 
+    StyleBox[
+     RowBox[{"Sqrt", "[", 
+      RowBox[{"vkf2", "[", "k", "]"}], "]"}],
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"]}], 
+   StyleBox[" ",
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], 
+   StyleBox[
+    RowBox[{"(*", 
+     RowBox[{"vk", ",", 
+      RowBox[{"k", " ", "in", " ", "kF"}]}], "*)"}],
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"ukf", 
+     StyleBox["[",
+      FontFamily->"Source Code Pro",
+      FontWeight->"Bold"], 
+     StyleBox[
+      RowBox[{"k_", "?", "NumericQ"}],
+      FontFamily->"Source Code Pro",
+      FontWeight->"Bold"], 
+     StyleBox["]",
+      FontFamily->"Source Code Pro",
+      FontWeight->"Bold"]}], 
+    StyleBox[":=",
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], 
+    StyleBox[
+     RowBox[{"Sqrt", "[", 
+      RowBox[{"ukf2", "[", "k", "]"}], "]"}],
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"]}], 
+   StyleBox[" ",
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], 
+   StyleBox[
+    RowBox[{"(*", 
+     RowBox[{"uk", ",", 
+      RowBox[{"k", " ", "in", " ", "kF"}]}], "*)"}],
+    FontFamily->"Source Code Pro",
+    FontWeight->"Bold"], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Plot", " ", "Deltak", " ", "with", " ", "and", " ", "without", " ", 
+     "RPA", " ", "to", " ", "check", " ", "the", " ", "fit"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"deltakef", "[", "k", "]"}], ",", 
+       RowBox[{"deltakysef", "[", "k", "]"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"k", ",", "0", ",", "25"}], "}"}], ",", 
+     RowBox[{"PlotLegends", "->", 
+      RowBox[{"{", 
+       RowBox[{"\"\<No RPA\>\"", ",", "\"\<With RPA\>\""}], "}"}]}], ",", 
+     RowBox[{"PlotRange", "->", "All"}], ",", 
+     RowBox[{"FrameLabel", "->", 
+      RowBox[{"{", 
+       RowBox[{
+       "\"\<q [\!\(\*SubscriptBox[\(k\), \(F\)]\)]\>\"", ",", 
+        "\"\<\[CapitalDelta][\!\(\*SubscriptBox[\(E\), \(F\)]\)]\>\""}], 
+       "}"}]}], ",", 
+     RowBox[{"BaseStyle", "->", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"FontFamily", "->", "\"\<Times New Roman\>\""}], ",", " ", 
+        RowBox[{"FontSize", "->", "20"}]}], "}"}]}], ",", 
+     RowBox[{"LabelStyle", "->", 
+      RowBox[{"Directive", "[", 
+       RowBox[{"Black", ",", "Large"}], "]"}]}], ",", 
+     RowBox[{"PlotStyle", "->", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", "Blue", "}"}], ",", 
+        RowBox[{"{", "Red", "}"}]}], "}"}]}], ",", 
+     RowBox[{"Epilog", "->", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"Text", "[", 
+          RowBox[{
+           RowBox[{"Row", "[", 
+            RowBox[{"{", 
+             RowBox[{
+             "\"\<\!\(\*SubscriptBox[\(\[Mu]\), \(s\)]\)=\>\"", ",", "usf", 
+              ",", "\"\<\!\(\*SubscriptBox[\(E\), \(F\)]\)\>\""}], "}"}], 
+            "]"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"18", ",", 
+             RowBox[{"deltakef", "[", "3", "]"}]}], "}"}]}], "]"}], "}"}], 
+        ",", 
+        RowBox[{"{", 
+         RowBox[{"Text", "[", 
+          RowBox[{
+           RowBox[{"Row", "[", 
+            RowBox[{"{", 
+             RowBox[{
+             "\"\<\!\(\*SubscriptBox[\(r\), \(s\)]\)=\>\"", ",", "rs", ",", 
+              "\"\<\!\(\*SuperscriptBox[SubscriptBox[\(a\), \(B\)], \
+\(*\)]\)\>\""}], "}"}], "]"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"18", ",", 
+             RowBox[{"deltakef", "[", "5", "]"}]}], "}"}]}], "]"}], "}"}]}], 
+       "}"}]}], ",", " ", 
+     RowBox[{"Frame", "->", "True"}]}], "]"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+     "All", " ", "polarization", " ", "functions", " ", "up", " ", "to", " ", 
+      "the", " ", "first", " ", "order", " ", "in", " ", "unit", " ", "of", 
+      " ", "N0"}], ",", " ", 
+     RowBox[{"q", " ", "in", " ", "unit", " ", "of", " ", "kf"}]}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"PolNS", 
+     StyleBox["[",
+      FontFamily->"Source Code Pro",
+      FontWeight->"Bold"], 
+     StyleBox[
+      RowBox[{"q_", "?", "NumericQ"}],
+      FontFamily->"Source Code Pro",
+      FontWeight->"Bold"], 
+     StyleBox["]",
+      FontFamily->"Source Code Pro",
+      FontWeight->"Bold"]}], 
+    StyleBox[":=",
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], 
+    RowBox[{
+     StyleBox[
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{"gsgv", "/", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"2", "*", "Pi"}], ")"}], "^", "2"}], ")"}]}], ")"}]}],
+      FontFamily->"Source Code Pro",
+      FontWeight->"Bold"], 
+     StyleBox["*",
+      FontFamily->"Source Code Pro",
+      FontWeight->"Bold"], 
+     RowBox[{"NIntegrate", "[", 
+      RowBox[{
+       RowBox[{"4", "*", "Pi", "*", "k", "*", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"HeavisideTheta", "[", 
+            RowBox[{"1", "-", "k"}], "]"}], "-", 
+           RowBox[{"HeavisideTheta", "[", 
+            RowBox[{"1", "-", 
+             RowBox[{"Sqrt", "[", 
+              RowBox[{
+               RowBox[{"k", "^", "2"}], "+", 
+               RowBox[{"q", "^", "2"}], "+", 
+               RowBox[{"(", 
+                RowBox[{"2", "*", "k", "*", "q", "*", 
+                 RowBox[{"Cos", "[", "t", "]"}]}], ")"}]}], "]"}]}], "]"}]}], 
+          ")"}], "/", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"q", "^", "2"}], "+", 
+           RowBox[{"(", 
+            RowBox[{"2", "*", "k", "*", "q", "*", 
+             RowBox[{"Cos", "[", "t", "]"}]}], ")"}]}], ")"}]}]}], ",", 
+       RowBox[{"{", 
+        RowBox[{"t", ",", "0", ",", 
+         RowBox[{"2", "*", "Pi"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"k", ",", "0", ",", 
+         RowBox[{"1", "+", "q"}]}], "}"}], ",", 
+       RowBox[{"MinRecursion", "->", "190"}], ",", 
+       RowBox[{"MaxRecursion", "->", "200"}], ",", 
+       RowBox[{"PrecisionGoal", "->", "5"}], ",", 
+       RowBox[{"AccuracyGoal", "->", "5"}], ",", 
+       RowBox[{"Method", "->", "\"\<LocalAdaptive\>\""}]}], "]"}]}]}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    StyleBox[
+     RowBox[{"PolN0", "[", 
+      RowBox[{"q_", "?", "NumericQ"}], "]"}],
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], 
+    StyleBox[":=",
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], 
+    RowBox[{
+     StyleBox[
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{"gsgv", "/", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"2", "*", "Pi"}], ")"}], "^", "2"}], ")"}]}], ")"}]}],
+      FontFamily->"Source Code Pro",
+      FontWeight->"Bold"], 
+     StyleBox["*",
+      FontFamily->"Source Code Pro",
+      FontWeight->"Bold"], 
+     RowBox[{"NIntegrate", "[", 
+      RowBox[{
+       RowBox[{"4", "*", "Pi", "*", "k", "*", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"ukf2", "[", "k", "]"}], "*", 
+             RowBox[{"vkf2", "[", 
+              RowBox[{"Sqrt", "[", 
+               RowBox[{
+                RowBox[{"k", "^", "2"}], "+", 
+                RowBox[{"q", "^", "2"}], "+", 
+                RowBox[{"(", 
+                 RowBox[{"2", "*", "k", "*", "q", "*", 
+                  RowBox[{"Cos", "[", "t", "]"}]}], ")"}]}], "]"}], "]"}]}], 
+            ")"}], "+", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"vkf2", "[", "k", "]"}], "*", 
+             RowBox[{"ukf2", "[", 
+              RowBox[{"Sqrt", "[", 
+               RowBox[{
+                RowBox[{"k", "^", "2"}], "+", 
+                RowBox[{"q", "^", "2"}], "+", 
+                RowBox[{"(", 
+                 RowBox[{"2", "*", "k", "*", "q", "*", 
+                  RowBox[{"Cos", "[", "t", "]"}]}], ")"}]}], "]"}], "]"}]}], 
+            ")"}]}], ")"}], "/", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"Ek", "[", 
+            RowBox[{"Sqrt", "[", 
+             RowBox[{
+              RowBox[{"k", "^", "2"}], "+", 
+              RowBox[{"q", "^", "2"}], "+", 
+              RowBox[{"(", 
+               RowBox[{"2", "*", "k", "*", "q", "*", 
+                RowBox[{"Cos", "[", "t", "]"}]}], ")"}]}], "]"}], "]"}], "+", 
+           
+           RowBox[{"Ek", "[", "k", "]"}]}], ")"}]}]}], ",", 
+       RowBox[{"{", 
+        RowBox[{"t", ",", "0", ",", 
+         RowBox[{"2", "*", "Pi"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"k", ",", "0.0", ",", "30"}], "}"}], ",", 
+       RowBox[{"MinRecursion", "->", "190"}], ",", 
+       RowBox[{"MaxRecursion", "->", "200"}], ",", 
+       RowBox[{"PrecisionGoal", "->", "5"}], ",", 
+       RowBox[{"AccuracyGoal", "->", "5"}], ",", 
+       RowBox[{"Method", "->", "\"\<LocalAdaptive\>\""}]}], "]"}]}]}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    StyleBox[
+     RowBox[{"PolA0", "[", 
+      RowBox[{"q_", "?", "NumericQ"}], "]"}],
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], 
+    StyleBox[":=",
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], 
+    RowBox[{
+     StyleBox[
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{"gsgv", "/", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"2", "*", "Pi"}], ")"}], "^", "2"}], ")"}]}], ")"}]}],
+      FontFamily->"Source Code Pro",
+      FontWeight->"Bold"], 
+     StyleBox["*",
+      FontFamily->"Source Code Pro",
+      FontWeight->"Bold"], 
+     StyleBox["2",
+      FontFamily->"Source Code Pro",
+      FontWeight->"Bold"], 
+     StyleBox["*",
+      FontFamily->"Source Code Pro",
+      FontWeight->"Bold"], 
+     RowBox[{"NIntegrate", "[", 
+      RowBox[{
+       RowBox[{"4", "*", "Pi", "*", "k", "*", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"ukf", "[", "k", "]"}], "*", 
+           RowBox[{"vkf", "[", "k", "]"}], "*", 
+           RowBox[{"vkf", "[", 
+            RowBox[{"Sqrt", "[", 
+             RowBox[{
+              RowBox[{"k", "^", "2"}], "+", 
+              RowBox[{"q", "^", "2"}], "+", 
+              RowBox[{"(", 
+               RowBox[{"2", "*", "k", "*", "q", "*", 
+                RowBox[{"Cos", "[", "t", "]"}]}], ")"}]}], "]"}], "]"}], "*", 
+           
+           RowBox[{"ukf", "[", 
+            RowBox[{"Sqrt", "[", 
+             RowBox[{
+              RowBox[{"k", "^", "2"}], "+", 
+              RowBox[{"q", "^", "2"}], "+", 
+              RowBox[{"(", 
+               RowBox[{"2", "*", "k", "*", "q", "*", 
+                RowBox[{"Cos", "[", "t", "]"}]}], ")"}]}], "]"}], "]"}]}], 
+          ")"}], "/", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"Ek", "[", 
+            RowBox[{"Sqrt", "[", 
+             RowBox[{
+              RowBox[{"k", "^", "2"}], "+", 
+              RowBox[{"q", "^", "2"}], "+", 
+              RowBox[{"(", 
+               RowBox[{"2", "*", "k", "*", "q", "*", 
+                RowBox[{"Cos", "[", "t", "]"}]}], ")"}]}], "]"}], "]"}], "+", 
+           
+           RowBox[{"Ek", "[", "k", "]"}]}], ")"}]}]}], ",", 
+       RowBox[{"{", 
+        RowBox[{"t", ",", "0", ",", 
+         RowBox[{"2", "*", "Pi"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"k", ",", "0.0", ",", "30"}], "}"}], ",", 
+       RowBox[{"MinRecursion", "->", "190"}], ",", 
+       RowBox[{"MaxRecursion", "->", "200"}], ",", 
+       RowBox[{"PrecisionGoal", "->", "5"}], ",", 
+       RowBox[{"AccuracyGoal", "->", "5"}], ",", 
+       RowBox[{"Method", "->", "\"\<LocalAdaptive\>\""}]}], "]"}]}]}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    StyleBox[
+     RowBox[{"PolSeeEX", "[", 
+      RowBox[{"q_", "?", "NumericQ"}], "]"}],
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], 
+    StyleBox[":=",
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], 
+    RowBox[{
+     StyleBox[
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{"gsgv", "/", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"2", "*", "Pi"}], ")"}], "^", "4"}], ")"}]}], ")"}]}],
+      FontFamily->"Source Code Pro",
+      FontWeight->"Bold"], 
+     StyleBox["*",
+      FontFamily->"Source Code Pro",
+      FontWeight->"Bold"], 
+     RowBox[{"NIntegrate", "[", 
+      RowBox[{
+       RowBox[{"8", "*", "Pi", "*", "k", "*", "alfa", "*", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"ukf2", "[", 
+               RowBox[{"Sqrt", "[", 
+                RowBox[{
+                 RowBox[{"q", "^", "2"}], "+", 
+                 RowBox[{"alfa", "^", "2"}], "+", 
+                 RowBox[{"(", 
+                  RowBox[{"2", "*", "q", "*", "alfa", "*", 
+                   RowBox[{"Cos", "[", "l", "]"}]}], ")"}]}], "]"}], "]"}], 
+              "*", 
+              RowBox[{"vkf2", "[", "alfa", "]"}]}], ")"}], "+", 
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"vkf2", "[", 
+               RowBox[{"Sqrt", "[", 
+                RowBox[{
+                 RowBox[{"q", "^", "2"}], "+", 
+                 RowBox[{"alfa", "^", "2"}], "+", 
+                 RowBox[{"(", 
+                  RowBox[{"2", "*", "q", "*", "alfa", "*", 
+                   RowBox[{"Cos", "[", "l", "]"}]}], ")"}]}], "]"}], "]"}], 
+              "*", 
+              RowBox[{"ukf2", "[", "alfa", "]"}]}], ")"}]}], ")"}], "*", 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"ukf2", "[", 
+               RowBox[{"Sqrt", "[", 
+                RowBox[{
+                 RowBox[{"q", "^", "2"}], "+", 
+                 RowBox[{"k", "^", "2"}], "+", 
+                 RowBox[{"(", 
+                  RowBox[{"2", "*", "q", "*", "k", "*", 
+                   RowBox[{"Cos", "[", "t", "]"}]}], ")"}]}], "]"}], "]"}], 
+              "*", 
+              RowBox[{"vkf2", "[", "k", "]"}]}], ")"}], "+", 
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"vkf2", "[", 
+               RowBox[{"Sqrt", "[", 
+                RowBox[{
+                 RowBox[{"q", "^", "2"}], "+", 
+                 RowBox[{"k", "^", "2"}], "+", 
+                 RowBox[{"(", 
+                  RowBox[{"2", "*", "q", "*", "k", "*", 
+                   RowBox[{"Cos", "[", "t", "]"}]}], ")"}]}], "]"}], "]"}], 
+              "*", 
+              RowBox[{"ukf2", "[", "k", "]"}]}], ")"}]}], ")"}]}], ")"}], "*", 
+        RowBox[{
+         RowBox[{"Us", "[", 
+          RowBox[{"Sqrt", "[", 
+           RowBox[{
+            RowBox[{"k", "^", "2"}], "+", 
+            RowBox[{"alfa", "^", "2"}], "-", 
+            RowBox[{"(", 
+             RowBox[{"2", "*", "k", "*", "alfa", "*", 
+              RowBox[{"Cos", "[", 
+               RowBox[{"l", "-", "t"}], "]"}]}], ")"}]}], "]"}], "]"}], "/", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"Ek", "[", "alfa", "]"}], "+", 
+             RowBox[{"Ek", "[", 
+              RowBox[{"Sqrt", "[", 
+               RowBox[{
+                RowBox[{"q", "^", "2"}], "+", 
+                RowBox[{"alfa", "^", "2"}], "+", 
+                RowBox[{"(", 
+                 RowBox[{"2", "*", "q", "*", "alfa", "*", 
+                  RowBox[{"Cos", "[", "l", "]"}]}], ")"}]}], "]"}], "]"}]}], 
+            ")"}], "*", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"Ek", "[", "k", "]"}], "+", 
+             RowBox[{"Ek", "[", 
+              RowBox[{"Sqrt", "[", 
+               RowBox[{
+                RowBox[{"q", "^", "2"}], "+", 
+                RowBox[{"k", "^", "2"}], "+", 
+                RowBox[{"(", 
+                 RowBox[{"2", "*", "q", "*", "k", "*", 
+                  RowBox[{"Cos", "[", "t", "]"}]}], ")"}]}], "]"}], "]"}]}], 
+            ")"}]}], ")"}]}]}], ",", 
+       RowBox[{"{", 
+        RowBox[{"t", ",", "0", ",", 
+         RowBox[{"2", "*", "Pi"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"l", ",", "0", ",", 
+         RowBox[{"2", "*", "Pi"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"k", ",", "0.0", ",", "25"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"alfa", ",", "0.0", ",", "25"}], "}"}], ",", 
+       RowBox[{"MinRecursion", "->", "190"}], ",", 
+       RowBox[{"MaxRecursion", "->", "200"}], ",", 
+       RowBox[{"PrecisionGoal", "->", "5"}], ",", 
+       RowBox[{"AccuracyGoal", "->", "5"}], ",", 
+       RowBox[{"Method", "->", "\"\<LocalAdaptive\>\""}]}], "]"}]}]}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    StyleBox[
+     RowBox[{"PolShhEX", "[", 
+      RowBox[{"q_", "?", "NumericQ"}], "]"}],
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], 
+    StyleBox[":=",
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], 
+    RowBox[{
+     StyleBox[
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{"gsgv", "/", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"2", "*", "Pi"}], ")"}], "^", "4"}], ")"}]}], ")"}]}],
+      FontFamily->"Source Code Pro",
+      FontWeight->"Bold"], 
+     StyleBox["*",
+      FontFamily->"Source Code Pro",
+      FontWeight->"Bold"], 
+     RowBox[{"NIntegrate", "[", 
+      RowBox[{
+       RowBox[{"8", "*", "Pi", "*", "k", "*", "alfa", "*", 
+        RowBox[{"(", 
+         RowBox[{"4", "*", 
+          RowBox[{"ukf", "[", 
+           RowBox[{"Sqrt", "[", 
+            RowBox[{
+             RowBox[{"q", "^", "2"}], "+", 
+             RowBox[{"alfa", "^", "2"}], "+", 
+             RowBox[{"(", 
+              RowBox[{"2", "*", "q", "*", "alfa", "*", 
+               RowBox[{"Cos", "[", "l", "]"}]}], ")"}]}], "]"}], "]"}], "*", 
+          RowBox[{"vkf", "[", 
+           RowBox[{"Sqrt", "[", 
+            RowBox[{
+             RowBox[{"q", "^", "2"}], "+", 
+             RowBox[{"alfa", "^", "2"}], "+", 
+             RowBox[{"(", 
+              RowBox[{"2", "*", "q", "*", "alfa", "*", 
+               RowBox[{"Cos", "[", "l", "]"}]}], ")"}]}], "]"}], "]"}], "*", 
+          RowBox[{"ukf", "[", 
+           RowBox[{"Sqrt", "[", 
+            RowBox[{
+             RowBox[{"q", "^", "2"}], "+", 
+             RowBox[{"k", "^", "2"}], "+", 
+             RowBox[{"(", 
+              RowBox[{"2", "*", "q", "*", "k", "*", 
+               RowBox[{"Cos", "[", "t", "]"}]}], ")"}]}], "]"}], "]"}], "*", 
+          RowBox[{"vkf", "[", 
+           RowBox[{"Sqrt", "[", 
+            RowBox[{
+             RowBox[{"q", "^", "2"}], "+", 
+             RowBox[{"k", "^", "2"}], "+", 
+             RowBox[{"(", 
+              RowBox[{"2", "*", "q", "*", "k", "*", 
+               RowBox[{"Cos", "[", "t", "]"}]}], ")"}]}], "]"}], "]"}]}], 
+         ")"}], "*", 
+        RowBox[{"ukf", "[", "k", "]"}], "*", 
+        RowBox[{"vkf", "[", "k", "]"}], "*", 
+        RowBox[{"ukf", "[", "alfa", "]"}], "*", 
+        RowBox[{"vkf", "[", "alfa", "]"}], "*", 
+        RowBox[{
+         RowBox[{"Us", "[", 
+          RowBox[{"Sqrt", "[", 
+           RowBox[{
+            RowBox[{"k", "^", "2"}], "+", 
+            RowBox[{"alfa", "^", "2"}], "-", 
+            RowBox[{"(", 
+             RowBox[{"2", "*", "k", "*", "alfa", "*", 
+              RowBox[{"Cos", "[", 
+               RowBox[{"l", "-", "t"}], "]"}]}], ")"}]}], "]"}], "]"}], "/", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"Ek", "[", "alfa", "]"}], "+", 
+             RowBox[{"Ek", "[", 
+              RowBox[{"Sqrt", "[", 
+               RowBox[{
+                RowBox[{"q", "^", "2"}], "+", 
+                RowBox[{"alfa", "^", "2"}], "+", 
+                RowBox[{"(", 
+                 RowBox[{"2", "*", "q", "*", "alfa", "*", 
+                  RowBox[{"Cos", "[", "l", "]"}]}], ")"}]}], "]"}], "]"}]}], 
+            ")"}], "*", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"Ek", "[", "k", "]"}], "+", 
+             RowBox[{"Ek", "[", 
+              RowBox[{"Sqrt", "[", 
+               RowBox[{
+                RowBox[{"q", "^", "2"}], "+", 
+                RowBox[{"k", "^", "2"}], "+", 
+                RowBox[{"(", 
+                 RowBox[{"2", "*", "q", "*", "k", "*", 
+                  RowBox[{"Cos", "[", "t", "]"}]}], ")"}]}], "]"}], "]"}]}], 
+            ")"}]}], ")"}]}]}], ",", 
+       RowBox[{"{", 
+        RowBox[{"t", ",", "0", ",", 
+         RowBox[{"2", "*", "Pi"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"l", ",", "0", ",", 
+         RowBox[{"2", "*", "Pi"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"k", ",", "0.0", ",", "25"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"alfa", ",", "0.0", ",", "25"}], "}"}], ",", 
+       RowBox[{"MinRecursion", "->", "190"}], ",", 
+       RowBox[{"MaxRecursion", "->", "200"}], ",", 
+       RowBox[{"PrecisionGoal", "->", "5"}], ",", 
+       RowBox[{"AccuracyGoal", "->", "5"}], ",", 
+       RowBox[{"Method", "->", "\"\<LocalAdaptive\>\""}]}], "]"}]}]}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    StyleBox[
+     RowBox[{"PolSehEX", "[", 
+      RowBox[{"q_", "?", "NumericQ"}], "]"}],
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], 
+    StyleBox[":=",
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], 
+    RowBox[{
+     StyleBox["2",
+      FontFamily->"Source Code Pro",
+      FontWeight->"Bold"], 
+     StyleBox["*",
+      FontFamily->"Source Code Pro",
+      FontWeight->"Bold"], 
+     StyleBox[
+      RowBox[{"(", 
+       RowBox[{"gsgv", "/", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"2", "*", "Pi"}], ")"}], "^", "4"}], ")"}]}], ")"}],
+      FontFamily->"Source Code Pro",
+      FontWeight->"Bold"], 
+     StyleBox["*",
+      FontFamily->"Source Code Pro",
+      FontWeight->"Bold"], 
+     RowBox[{"NIntegrate", "[", 
+      RowBox[{
+       RowBox[{"8", "*", "Pi", "*", "k", "*", "alfa", "*", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"vkf2", "[", 
+             RowBox[{"Sqrt", "[", 
+              RowBox[{
+               RowBox[{"q", "^", "2"}], "+", 
+               RowBox[{"alfa", "^", "2"}], "+", 
+               RowBox[{"(", 
+                RowBox[{"2", "*", "q", "*", "alfa", "*", 
+                 RowBox[{"Cos", "[", "l", "]"}]}], ")"}]}], "]"}], "]"}], "-", 
+            RowBox[{"ukf2", "[", 
+             RowBox[{"Sqrt", "[", 
+              RowBox[{
+               RowBox[{"q", "^", "2"}], "+", 
+               RowBox[{"alfa", "^", "2"}], "+", 
+               RowBox[{"(", 
+                RowBox[{"2", "*", "q", "*", "alfa", "*", 
+                 RowBox[{"Cos", "[", "l", "]"}]}], ")"}]}], "]"}], "]"}]}], 
+           ")"}], "*", 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"vkf2", "[", 
+             RowBox[{"Sqrt", "[", 
+              RowBox[{
+               RowBox[{"q", "^", "2"}], "+", 
+               RowBox[{"k", "^", "2"}], "+", 
+               RowBox[{"(", 
+                RowBox[{"2", "*", "q", "*", "k", "*", 
+                 RowBox[{"Cos", "[", "t", "]"}]}], ")"}]}], "]"}], "]"}], "-", 
+            RowBox[{"ukf2", "[", 
+             RowBox[{"Sqrt", "[", 
+              RowBox[{
+               RowBox[{"q", "^", "2"}], "+", 
+               RowBox[{"k", "^", "2"}], "+", 
+               RowBox[{"(", 
+                RowBox[{"2", "*", "q", "*", "k", "*", 
+                 RowBox[{"Cos", "[", "t", "]"}]}], ")"}]}], "]"}], "]"}]}], 
+           ")"}]}], ")"}], "*", 
+        RowBox[{"ukf", "[", "k", "]"}], "*", 
+        RowBox[{"vkf", "[", "k", "]"}], "*", 
+        RowBox[{"ukf", "[", "alfa", "]"}], "*", 
+        RowBox[{"vkf", "[", "alfa", "]"}], "*", 
+        RowBox[{
+         RowBox[{"Ud", "[", 
+          RowBox[{"Sqrt", "[", 
+           RowBox[{
+            RowBox[{"k", "^", "2"}], "+", 
+            RowBox[{"alfa", "^", "2"}], "-", 
+            RowBox[{"(", 
+             RowBox[{"2", "*", "k", "*", "alfa", "*", 
+              RowBox[{"Cos", "[", 
+               RowBox[{"l", "-", "t"}], "]"}]}], ")"}]}], "]"}], "]"}], "/", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"Ek", "[", "alfa", "]"}], "+", 
+             RowBox[{"Ek", "[", 
+              RowBox[{"Sqrt", "[", 
+               RowBox[{
+                RowBox[{"q", "^", "2"}], "+", 
+                RowBox[{"alfa", "^", "2"}], "+", 
+                RowBox[{"(", 
+                 RowBox[{"2", "*", "q", "*", "alfa", "*", 
+                  RowBox[{"Cos", "[", "l", "]"}]}], ")"}]}], "]"}], "]"}]}], 
+            ")"}], "*", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"Ek", "[", "k", "]"}], "+", 
+             RowBox[{"Ek", "[", 
+              RowBox[{"Sqrt", "[", 
+               RowBox[{
+                RowBox[{"q", "^", "2"}], "+", 
+                RowBox[{"k", "^", "2"}], "+", 
+                RowBox[{"(", 
+                 RowBox[{"2", "*", "q", "*", "k", "*", 
+                  RowBox[{"Cos", "[", "t", "]"}]}], ")"}]}], "]"}], "]"}]}], 
+            ")"}]}], ")"}]}]}], ",", 
+       RowBox[{"{", 
+        RowBox[{"t", ",", "0", ",", 
+         RowBox[{"2", "*", "Pi"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"l", ",", "0", ",", 
+         RowBox[{"2", "*", "Pi"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"k", ",", "0.0", ",", "25"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"alfa", ",", "0.0", ",", "25"}], "}"}], ",", 
+       RowBox[{"MinRecursion", "->", "190"}], ",", 
+       RowBox[{"MaxRecursion", "->", "200"}], ",", 
+       RowBox[{"PrecisionGoal", "->", "5"}], ",", 
+       RowBox[{"AccuracyGoal", "->", "5"}], ",", 
+       RowBox[{"Method", "->", "\"\<LocalAdaptive\>\""}]}], "]"}]}]}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    StyleBox[
+     RowBox[{"PolDeeEX", "[", 
+      RowBox[{"q_", "?", "NumericQ"}], "]"}],
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], 
+    StyleBox[":=",
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], 
+    RowBox[{
+     StyleBox[
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{"gsgv", "/", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"2", "*", "Pi"}], ")"}], "^", "4"}], ")"}]}], ")"}]}],
+      FontFamily->"Source Code Pro",
+      FontWeight->"Bold"], 
+     StyleBox["*",
+      FontFamily->"Source Code Pro",
+      FontWeight->"Bold"], 
+     RowBox[{"NIntegrate", "[", 
+      RowBox[{
+       RowBox[{"8", "*", "Pi", "*", "k", "*", "alfa", "*", "2", "*", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"vkf2", "[", "k", "]"}], "*", 
+              RowBox[{"ukf2", "[", 
+               RowBox[{"Sqrt", "[", 
+                RowBox[{
+                 RowBox[{"q", "^", "2"}], "+", 
+                 RowBox[{"k", "^", "2"}], "+", 
+                 RowBox[{"(", 
+                  RowBox[{"2", "*", "q", "*", "k", "*", 
+                   RowBox[{"Cos", "[", "t", "]"}]}], ")"}]}], "]"}], "]"}]}], 
+             ")"}], "+", 
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"ukf2", "[", "k", "]"}], "*", 
+              RowBox[{"vkf2", "[", 
+               RowBox[{"Sqrt", "[", 
+                RowBox[{
+                 RowBox[{"q", "^", "2"}], "+", 
+                 RowBox[{"k", "^", "2"}], "+", 
+                 RowBox[{"(", 
+                  RowBox[{"2", "*", "q", "*", "k", "*", 
+                   RowBox[{"Cos", "[", "t", "]"}]}], ")"}]}], "]"}], "]"}]}], 
+             ")"}]}], ")"}], "*", 
+          RowBox[{"vkf", "[", 
+           RowBox[{"Sqrt", "[", 
+            RowBox[{
+             RowBox[{"q", "^", "2"}], "+", 
+             RowBox[{"alfa", "^", "2"}], "+", 
+             RowBox[{"(", 
+              RowBox[{"2", "*", "q", "*", "alfa", "*", 
+               RowBox[{"Cos", "[", "l", "]"}]}], ")"}]}], "]"}], "]"}], "*", 
+          RowBox[{"ukf", "[", 
+           RowBox[{"Sqrt", "[", 
+            RowBox[{
+             RowBox[{"q", "^", "2"}], "+", 
+             RowBox[{"alfa", "^", "2"}], "+", 
+             RowBox[{"(", 
+              RowBox[{"2", "*", "q", "*", "alfa", "*", 
+               RowBox[{"Cos", "[", "l", "]"}]}], ")"}]}], "]"}], "]"}], "*", 
+          RowBox[{"vkf", "[", "alfa", "]"}], "*", 
+          RowBox[{"ukf", "[", "alfa", "]"}]}], ")"}], "*", 
+        RowBox[{
+         RowBox[{"Us", "[", 
+          RowBox[{"Sqrt", "[", 
+           RowBox[{
+            RowBox[{"k", "^", "2"}], "+", 
+            RowBox[{"alfa", "^", "2"}], "-", 
+            RowBox[{"(", 
+             RowBox[{"2", "*", "k", "*", "alfa", "*", 
+              RowBox[{"Cos", "[", 
+               RowBox[{"l", "-", "t"}], "]"}]}], ")"}]}], "]"}], "]"}], "/", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"Ek", "[", "alfa", "]"}], "+", 
+             RowBox[{"Ek", "[", 
+              RowBox[{"Sqrt", "[", 
+               RowBox[{
+                RowBox[{"q", "^", "2"}], "+", 
+                RowBox[{"alfa", "^", "2"}], "+", 
+                RowBox[{"(", 
+                 RowBox[{"2", "*", "q", "*", "alfa", "*", 
+                  RowBox[{"Cos", "[", "l", "]"}]}], ")"}]}], "]"}], "]"}]}], 
+            ")"}], "*", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"Ek", "[", "k", "]"}], "+", 
+             RowBox[{"Ek", "[", 
+              RowBox[{"Sqrt", "[", 
+               RowBox[{
+                RowBox[{"q", "^", "2"}], "+", 
+                RowBox[{"k", "^", "2"}], "+", 
+                RowBox[{"(", 
+                 RowBox[{"2", "*", "q", "*", "k", "*", 
+                  RowBox[{"Cos", "[", "t", "]"}]}], ")"}]}], "]"}], "]"}]}], 
+            ")"}]}], ")"}]}]}], ",", 
+       RowBox[{"{", 
+        RowBox[{"t", ",", "0", ",", 
+         RowBox[{"2", "*", "Pi"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"l", ",", "0", ",", 
+         RowBox[{"2", "*", "Pi"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"k", ",", "0.0", ",", "25"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"alfa", ",", "0.0", ",", "25"}], "}"}], ",", 
+       RowBox[{"MinRecursion", "->", "190"}], ",", 
+       RowBox[{"MaxRecursion", "->", "200"}], ",", 
+       RowBox[{"PrecisionGoal", "->", "5"}], ",", 
+       RowBox[{"AccuracyGoal", "->", "5"}], ",", 
+       RowBox[{"Method", "->", "\"\<LocalAdaptive\>\""}]}], "]"}]}]}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    StyleBox[
+     RowBox[{"PolDehEX", "[", 
+      RowBox[{"q_", "?", "NumericQ"}], "]"}],
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], 
+    StyleBox[":=",
+     FontFamily->"Source Code Pro",
+     FontWeight->"Bold"], 
+    RowBox[{
+     StyleBox[
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{"gsgv", "/", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"2", "*", "Pi"}], ")"}], "^", "4"}], ")"}]}], ")"}]}],
+      FontFamily->"Source Code Pro",
+      FontWeight->"Bold"], 
+     StyleBox["*",
+      FontFamily->"Source Code Pro",
+      FontWeight->"Bold"], 
+     RowBox[{"NIntegrate", "[", 
+      RowBox[{
+       RowBox[{"8", "*", "Pi", "*", "2", "*", "k", "*", "alfa", "*", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"ukf", "[", 
+           RowBox[{"Sqrt", "[", 
+            RowBox[{
+             RowBox[{"q", "^", "2"}], "+", 
+             RowBox[{"alfa", "^", "2"}], "+", 
+             RowBox[{"(", 
+              RowBox[{"2", "*", "q", "*", "alfa", "*", 
+               RowBox[{"Cos", "[", "l", "]"}]}], ")"}]}], "]"}], "]"}], "*", 
+          RowBox[{"vkf", "[", 
+           RowBox[{"Sqrt", "[", 
+            RowBox[{
+             RowBox[{"q", "^", "2"}], "+", 
+             RowBox[{"alfa", "^", "2"}], "+", 
+             RowBox[{"(", 
+              RowBox[{"2", "*", "q", "*", "alfa", "*", 
+               RowBox[{"Cos", "[", "l", "]"}]}], ")"}]}], "]"}], "]"}], "*", 
+          RowBox[{"ukf", "[", "k", "]"}], "*", 
+          RowBox[{"vkf", "[", "k", "]"}], "*", 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"vkf2", "[", 
+             RowBox[{"Sqrt", "[", 
+              RowBox[{
+               RowBox[{"q", "^", "2"}], "+", 
+               RowBox[{"k", "^", "2"}], "+", 
+               RowBox[{"(", 
+                RowBox[{"2", "*", "q", "*", "k", "*", 
+                 RowBox[{"Cos", "[", "t", "]"}]}], ")"}]}], "]"}], "]"}], "-", 
+            RowBox[{"ukf2", "[", 
+             RowBox[{"Sqrt", "[", 
+              RowBox[{
+               RowBox[{"q", "^", "2"}], "+", 
+               RowBox[{"k", "^", "2"}], "+", 
+               RowBox[{"(", 
+                RowBox[{"2", "*", "q", "*", "k", "*", 
+                 RowBox[{"Cos", "[", "t", "]"}]}], ")"}]}], "]"}], "]"}]}], 
+           ")"}], "*", 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"ukf2", "[", "alfa", "]"}], "-", 
+            RowBox[{"vkf2", "[", "alfa", "]"}]}], ")"}]}], ")"}], "*", 
+        RowBox[{
+         RowBox[{"Ud", "[", 
+          RowBox[{"Sqrt", "[", 
+           RowBox[{
+            RowBox[{"k", "^", "2"}], "+", 
+            RowBox[{"alfa", "^", "2"}], "-", 
+            RowBox[{"(", 
+             RowBox[{"2", "*", "k", "*", "alfa", "*", 
+              RowBox[{"Cos", "[", 
+               RowBox[{"l", "-", "t"}], "]"}]}], ")"}]}], "]"}], "]"}], "/", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"Ek", "[", "alfa", "]"}], "+", 
+             RowBox[{"Ek", "[", 
+              RowBox[{"Sqrt", "[", 
+               RowBox[{
+                RowBox[{"q", "^", "2"}], "+", 
+                RowBox[{"alfa", "^", "2"}], "+", 
+                RowBox[{"(", 
+                 RowBox[{"2", "*", "q", "*", "alfa", "*", 
+                  RowBox[{"Cos", "[", "l", "]"}]}], ")"}]}], "]"}], "]"}]}], 
+            ")"}], "*", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"Ek", "[", "k", "]"}], "+", 
+             RowBox[{"Ek", "[", 
+              RowBox[{"Sqrt", "[", 
+               RowBox[{
+                RowBox[{"q", "^", "2"}], "+", 
+                RowBox[{"k", "^", "2"}], "+", 
+                RowBox[{"(", 
+                 RowBox[{"2", "*", "q", "*", "k", "*", 
+                  RowBox[{"Cos", "[", "t", "]"}]}], ")"}]}], "]"}], "]"}]}], 
+            ")"}]}], ")"}]}]}], ",", 
+       RowBox[{"{", 
+        RowBox[{"t", ",", "0", ",", 
+         RowBox[{"2", "*", "Pi"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"l", ",", "0", ",", 
+         RowBox[{"2", "*", "Pi"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"k", ",", "0.0", ",", "25"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"alfa", ",", "0.0", ",", "25"}], "}"}], ",", 
+       RowBox[{"MinRecursion", "->", "190"}], ",", 
+       RowBox[{"MaxRecursion", "->", "200"}], ",", 
+       RowBox[{"PrecisionGoal", "->", "5"}], ",", 
+       RowBox[{"AccuracyGoal", "->", "5"}], ",", 
+       RowBox[{"Method", "->", "\"\<LocalAdaptive\>\""}]}], "]"}]}]}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"PolN0p", "=", 
+    RowBox[{"ParallelTable", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"q", ",", 
+        RowBox[{"PolN0", "[", "q", "]"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"q", ",", "0", ",", "5", ",", 
+        RowBox[{"2.5", "/", "20"}]}], "}"}]}], "]"}]}], "\[IndentingNewLine]", 
+   RowBox[{"PolA0p", "=", 
+    RowBox[{"ParallelTable", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"q", ",", 
+        RowBox[{"PolA0", "[", "q", "]"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"q", ",", "0", ",", "5", ",", 
+        RowBox[{"2.5", "/", "20"}]}], "}"}]}], "]"}]}], "\[IndentingNewLine]",
+    "\[IndentingNewLine]", 
+   RowBox[{"PolSeeEXp", "=", 
+    RowBox[{"ParallelTable", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"q", ",", 
+        RowBox[{"PolSeeEX", "[", "q", "]"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"q", ",", "0", ",", "5", ",", 
+        RowBox[{"2.5", "/", "20"}]}], "}"}]}], "]"}]}], "\[IndentingNewLine]",
+    "\[IndentingNewLine]", 
+   RowBox[{"PolShhEXp", "=", 
+    RowBox[{"ParallelTable", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"q", ",", 
+        RowBox[{"PolShhEX", "[", "q", "]"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"q", ",", "0", ",", "5", ",", 
+        RowBox[{"2.5", "/", "20"}]}], "}"}]}], "]"}]}], "\[IndentingNewLine]",
+    "\[IndentingNewLine]", 
+   RowBox[{"PolSehEXp", "=", 
+    RowBox[{"ParallelTable", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"q", ",", 
+        RowBox[{"PolSehEX", "[", "q", "]"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"q", ",", "0", ",", "5", ",", 
+        RowBox[{"2.5", "/", "20"}]}], "}"}]}], "]"}]}], "\[IndentingNewLine]",
+    "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"PolDeeEXp", "=", 
+    RowBox[{"ParallelTable", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"q", ",", 
+        RowBox[{"PolDeeEX", "[", "q", "]"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"q", ",", "0", ",", "5", ",", 
+        RowBox[{"2.5", "/", "20"}]}], "}"}]}], "]"}]}], "\[IndentingNewLine]",
+    "\[IndentingNewLine]", 
+   RowBox[{"PolDehEX1p", "=", 
+    RowBox[{"ParallelTable", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"q", ",", 
+        RowBox[{"PolDehEX", "[", "q", "]"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"q", ",", "0", ",", "5", ",", 
+        RowBox[{"2.5", "/", "20"}]}], "}"}]}], "]"}]}], 
+   "\[IndentingNewLine]"}]}]], "Input",
+ FontFamily->"Consolas",
+ FontSize->18,ExpressionUUID->"a45690cd-db11-4ac5-8565-82337675b55f"]
+},
+WindowSize->{1440, 756},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"12.0 for Microsoft Windows (64-bit) (April 8, 2019)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 61369, 1767, 4774, "Input",ExpressionUUID->"a45690cd-db11-4ac5-8565-82337675b55f"]
+}
+]
+*)
+
