@@ -1,0 +1,2 @@
+gap_number_YINS.f90 contains the Fortran90 code to self-consistently solve the gap and number equation at zero temperature for an electron-hole bilayer system with the inclusion of the Hartree-Fock term and without a screening process. 
+RPA.nb contains the Mathematica 14 code that evaluates all the first-order corrections to the normal and anomalous polarization function for a fixed density using the data produced by the gap_number_YINS.f90 code in the output "Deltakvkukd[value]YINS.txt"
